@@ -15,7 +15,7 @@ function twoSum(nums: number[], target: number): number[] {
 
 function test(nums: number[], target: number, expected: number[]) {
     let result = twoSum(nums, target);
-    if (result.length == 2 && result[0] == expected[0] && result[1] == expected[1]) {
+    if (result.toString() == expected.toString()) {
         console.log("GOOD - ", nums, ", ", target, ": ", expected);
     } else {
         console.log("FAIL - ", nums, ", ", target, ": ", expected, ". Got ", result);
