@@ -1,73 +1,3 @@
-function romanToInt0(s: string): number {
-    let roman_tables: {[key:string]:number}[] = [
-        {},
-        {
-            "I": 1,
-            "V": 5,
-            "X": 10,
-            "L": 50,
-            "C": 100,
-            "D": 500,
-            "M": 1000,
-        },
-        {
-            "II": 2,
-            "XX": 20,
-            "CC": 200,
-            "MM": 2000,
-            "IV": 4,
-            "XL": 40,
-            "CD": 400,
-            "VI": 6,
-            "LX": 60,
-            "DC": 600,
-            "IX": 9,
-            "XC": 90,
-            "CM": 900,
-        },
-        {
-            "III": 3,
-            "XXX": 30,
-            "CCC": 300,
-            "MMM": 3000,
-            "VII": 7,
-            "LXX": 70,
-            "DCC": 700,
-        },
-        {
-            "VIII": 8,
-            "LXXX": 80,
-            "DCCC": 800,
-        },
-    ];
-
-    let result = 0;
-    let len = s.length;
-    let i = 0;
-
-    function greedy_find(): number {
-        for (let nr_digits = 4; nr_digits > 0; nr_digits--) {
-            if (i + nr_digits <= len) {
-                let subs = s.substring(i, i + nr_digits);
-                let r2i = roman_tables[nr_digits];
-                for (const roman_digits in r2i) {
-                    if (subs === roman_digits) {
-                        result += r2i[roman_digits];
-                        return i + nr_digits;
-                    }
-                }
-            }
-        }
-        throw new Error("should never reach here");
-    }
-
-    while (i < len) {
-        i = greedy_find();
-    }
-
-    return result;
-};
-
 const RomanTables: Map<string, number>[] = [
     new Map(),
     new Map([
@@ -110,29 +40,22 @@ const RomanTables: Map<string, number>[] = [
     ]),
 ];
 
-function greedy_find(s: string, i: number, result: number) {
-    let len = s.length;
-    for (let nr_digits = 4; nr_digits > 0; nr_digits--) {
-        if (i + nr_digits <= len) {
-            let subs = s.substring(i, i + nr_digits);
-            let r2i = RomanTables[nr_digits];
-            for (const [roman, arabic] of r2i) {
-                if (subs === roman) {
-                    return [i + nr_digits, result + arabic];
-                }
-            }
-        }
-    }
-    throw new Error("should never reach here");
-};
-
 function romanToInt(s: string): number {
     let result = 0;
     let len = s.length;
     let i = 0;
 
     while (i < len) {
-        [i, result] = greedy_find(s, i, result);
+        for (let nr_digits = 4; nr_digits > 0; nr_digits--) {
+            if (i + nr_digits <= len) {
+                let arabic = RomanTables[nr_digits].get(s.substring(i, i + nr_digits));
+                if (arabic !== undefined) {
+                    i += nr_digits;
+                    result += arabic;
+                    break;
+                }
+            }
+        }
     }
 
     return result;
