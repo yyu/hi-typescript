@@ -12,7 +12,7 @@ function isPalindrome(x: number): boolean {
 function test(x: number, is_palindrome: boolean) {
     let correct = (is_palindrome && isPalindrome(x)) || ((!is_palindrome) && (!isPalindrome(x)));
     console.log(correct ? "GOOD - " : "FAIL - ", x);
-}
+};
 
 test(0, true);
 test(1, true);
@@ -22,3 +22,5 @@ test(121, true);
 test(123, false);
 test(-1, false);
 test(-121, false);
+
+export {};

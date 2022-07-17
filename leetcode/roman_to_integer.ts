@@ -75,7 +75,7 @@ function test(s: string, n: number) {
     } else {
         console.log(`FAIL - ${s} = ${n} but got ${x}`);
     }
-}
+};
 
 test("I", 1);
 test("II", 2);
@@ -115,3 +115,5 @@ test("MCMXCIV", 1994);
 test("MMXIV", 2014);
 test("MMMCMXCIX", 3999);
 test("MMXXII", 2022);
+
+export {};
