@@ -9,14 +9,16 @@ function isPalindrome(x: number): boolean {
     return true;
 };
 
-function test(x: number, expected: boolean) {
-    if (expected) {
-        console.log(isPalindrome(x) ? "GOOD - " : "FAIL - ", x);
-    } else {
-        console.log(isPalindrome(x) ? "FAIL - " : "GOOD - ", x);
-    }
+function test(x: number, is_palindrome: boolean) {
+    let correct = (is_palindrome && isPalindrome(x)) || ((!is_palindrome) && (!isPalindrome(x)));
+    console.log(correct ? "GOOD - " : "FAIL - ", x);
 }
 
 test(0, true);
+test(1, true);
+test(11, true);
+test(21, false);
 test(121, true);
+test(123, false);
+test(-1, false);
 test(-121, false);
