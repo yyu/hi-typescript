@@ -1,4 +1,4 @@
-function isPalindrome(x: number): boolean {
+function isPalindrome_0(x: number): boolean {
     let s = x.toString();
     let len = s.length;
     for (let i = 0; i < len / 2; i++) {
@@ -7,6 +7,19 @@ function isPalindrome(x: number): boolean {
         }
     }
     return true;
+};
+
+function isPalindrome(x: number): boolean {
+    if (x < 0) {
+        return false;
+    }
+    let r = 0;
+    let y = x
+    while (y > 0) {
+        r = r * 10 + (y % 10);
+        y = Math.floor(y / 10);
+    }
+    return r === x;
 };
 
 function test(x: number, is_palindrome: boolean) {
