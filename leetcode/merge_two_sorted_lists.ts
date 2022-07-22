@@ -8,7 +8,7 @@ class ListNode {
     }
 }
 
-function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
+function mergeTwoLists0(list1: ListNode | null, list2: ListNode | null): ListNode | null {
     let p1: ListNode | null = list1;
     let p2: ListNode | null = list2;
     let r = new ListNode(0, null);
@@ -35,6 +35,18 @@ function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode
 
     return r.next;
 };
+
+function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
+    if (!list1) return list2;
+    if (!list2) return list1;
+    let [a, b] = [list1, list2];
+    if (list1.val > list2.val) {
+        [a, b] = [list2, list1];
+    }
+    let tail = mergeTwoLists(a.next, b);
+    a.next = tail;
+    return a;
+}
 
 function a2List(a: number[]) {
     let head: ListNode | null = null;
